@@ -1,0 +1,93 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Halte zoeken",
+        "description": "Voer een zoekterm in om een halte te vinden.",
+        "data": {
+          "search": "Zoekterm"
+        },
+        "data_description": {
+          "search": "Bijvoorbeeld plaats en haltenaam"
+        }
+      },
+      "select_stop": {
+        "title": "Halte zoeken",
+        "description": "Kies je halte uit de lijst.",
+        "data": {
+          "selected_stop": "Kies een halte"
+        },
+        "data_description": {
+          "selected_stop": "Kies -- Zoek opnieuw -- om opnieuw te zoeken"
+        }
+      },
+      "filters": {
+        "title": "Filters",
+        "description": "Optioneel: beperk de halte tot bepaalde lijnen. Lijn en richting volgen kan later via Configureren.",
+        "data": {
+          "short_name_filter": "Filter op lijnnummer"
+        },
+        "data_description": {
+          "short_name_filter": "Lijnnummers gescheiden door komma's (bijv. 1,2,3)"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opties bushalte",
+        "description": "Volg bepaalde lijnen en richtingen met eigen sensoren.",
+        "menu_options": {
+          "add_filter": "Filter op lijn/richting toevoegen",
+          "remove_filter": "Filters verwijderen"
+        }
+      },
+      "add_filter": {
+        "title": "Filter toevoegen — {stop}",
+        "description": "Kies één of meer lijnnummers. In de volgende stap kies je de richting(en).",
+        "data": {
+          "lines": "Lijnnummer(s)",
+          "name": "Naam van het filter (optioneel)",
+          "count": "Aantal volgende vertrekken in de attributen"
+        },
+        "data_description": {
+          "name": "Leeg = automatisch, bijv. \"73 naar Zeist\"."
+        }
+      },
+      "add_filter_directions": {
+        "title": "Richting — lijn {lines}",
+        "description": "Kies de richting(en) (bestemmingen). Leeg = alle richtingen.",
+        "data": {
+          "directions": "Richting(en)"
+        }
+      },
+      "remove_filter": {
+        "title": "Filters verwijderen",
+        "description": "De sensoren van verwijderde filters worden verwijderd.",
+        "data": {
+          "filters": "Te verwijderen filters"
+        }
+      }
+    },
+    "error": {
+      "no_lines": "Kies minstens één lijnnummer."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "next_minutes": {
+        "name": "Eerstvolgende bus over"
+      },
+      "next_time": {
+        "name": "Eerstvolgende vertrektijd"
+      },
+      "filter_minutes": {
+        "name": "{filter} vertrek over"
+      },
+      "filter_time": {
+        "name": "{filter} vertrektijd"
+      }
+    }
+  }
+}

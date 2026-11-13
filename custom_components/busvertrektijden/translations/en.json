@@ -32,5 +32,62 @@
         }
       }
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Bus stop options",
+        "description": "Follow specific lines and directions with their own sensors.",
+        "menu_options": {
+          "add_filter": "Add a line/direction filter",
+          "remove_filter": "Remove filters"
+        }
+      },
+      "add_filter": {
+        "title": "Add filter — {stop}",
+        "description": "Choose one or more line numbers. In the next step you can pick the direction(s).",
+        "data": {
+          "lines": "Line number(s)",
+          "name": "Filter name (optional)",
+          "count": "Number of upcoming departures in the attributes"
+        },
+        "data_description": {
+          "name": "Empty = automatic, e.g. \"73 naar Zeist\"."
+        }
+      },
+      "add_filter_directions": {
+        "title": "Direction — line {lines}",
+        "description": "Choose the direction(s) (destinations). Leave empty for all directions.",
+        "data": {
+          "directions": "Direction(s)"
+        }
+      },
+      "remove_filter": {
+        "title": "Remove filters",
+        "description": "The sensors of removed filters are deleted.",
+        "data": {
+          "filters": "Filters to remove"
+        }
+      }
+    },
+    "error": {
+      "no_lines": "Choose at least one line number."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "next_minutes": {
+        "name": "Next bus in"
+      },
+      "next_time": {
+        "name": "Next departure time"
+      },
+      "filter_minutes": {
+        "name": "{filter} departs in"
+      },
+      "filter_time": {
+        "name": "{filter} departure time"
+      }
+    }
   }
 }
