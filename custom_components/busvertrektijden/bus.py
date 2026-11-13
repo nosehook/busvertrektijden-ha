@@ -26,7 +26,6 @@ class BusStop:
 
     @classmethod
     def from_api_response(cls, data):
-        
         return cls(
             cancelled=data['realtime']['cancelled'],
             delay=data['realtime']['delay'],
@@ -36,9 +35,8 @@ class BusStop:
             name=data['computed']['name'],
             seconds=data['computed']['seconds'],
             trip_name=data['computed'].get('trip_name'),
-            alerts = list(map(lambda x: x['header'], data['alerts']))
+            alerts=list(map(lambda x: x['header'], data['alerts']))
         )
-
 
 
 class Bus:
@@ -46,16 +44,28 @@ class Bus:
         self.stop_name = stop_name
         self.short_name_filter = short_name_filter
 
-    async def fetch(self):
-        result = {"alerts": [], "stops": []}
-        async with aiohttp.ClientSession() as session:
-            url = f"{API_URL}/stop/{self.stop_name.lower()}?"
-            if self.short_name_filter:
-                url += f"filternumbers={self.short_name_filter}"
-            async with session.get(url) as response:
+    async def fetch(self, session: aiohttp.ClientSession | None = None):
+        """Fetch all departures for the stop.
+
+        Returns {"alerts": [...], "stops": [...]} with every departure the API returns
+        (the stop sensor itself still only exposes the first 10).
+        """
+        url = f"{API_URL}/stop/{self.stop_name.lower()}?"
+        if self.short_name_filter:
+            url += f"filternumbers={self.short_name_filter}"
+        own = session is None
+        if own:
+            session = aiohttp.ClientSession()
+        try:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=20)) as response:
+                response.raise_for_status()
                 data = await response.json()
-                stopAlerts = list(data['result']['stop_alerts'])
-                stopTimes = list(data['result']['stop_times'])[:10]
-                result['alerts'] = [stopAlert['header'] for stopAlert in stopAlerts]
-                result['stops'] = [BusStop.from_api_response(stop_time).__dict__ for stop_time in stopTimes]
-                return result
+        finally:
+            if own:
+                await session.close()
+        stop_alerts = list(data['result']['stop_alerts'])
+        stop_times = list(data['result']['stop_times'])
+        return {
+            "alerts": [a['header'] for a in stop_alerts],
+            "stops": [BusStop.from_api_response(s).__dict__ for s in stop_times],
+        }

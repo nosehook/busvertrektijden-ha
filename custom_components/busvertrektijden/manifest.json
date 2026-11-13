@@ -1,13 +1,16 @@
 {
   "domain": "busvertrektijden",
   "name": "Bus vertrektijden",
-  "codeowners": ["@kerstenremco"],
+  "codeowners": [
+    "@kerstenremco",
+    "@nosehook"
+  ],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/kerstenremco/busvertrektijden-ha/",
+  "documentation": "https://github.com/nosehook/busvertrektijden-ha/",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/kerstenremco/busvertrektijden-ha/issues",
+  "issue_tracker": "https://github.com/nosehook/busvertrektijden-ha/issues",
   "requirements": [],
-  "version": "2.1.0"
+  "version": "3.0.0"
 }
