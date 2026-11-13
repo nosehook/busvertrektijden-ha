@@ -64,7 +64,7 @@ class StopSensor(CoordinatorEntity[BusCoordinator], SensorEntity):
         self._stop = entry.data[CONF_STOP_NAME]
         self._attr_name = f"Bushalte {self._stop}"
         self._attr_unique_id = self._stop
-        self._attr_device_info = _device_info(entry)
+        # No device_info on purpose: keeps the v2 friendly name "Bushalte <stop>" unchanged.
 
     @property
     def native_value(self):
